@@ -118,3 +118,14 @@ mmseg/.mim
 
 # Pytorch
 *.pth
+
+# other
+/.circleci
+/.circleci
+/.dev_scripts
+/demo
+/mmdet
+*.cache
+/.github
+/dataset/img
+/dataset/labels
