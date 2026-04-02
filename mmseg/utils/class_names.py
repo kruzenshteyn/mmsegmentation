@@ -11,6 +11,13 @@ def cityscapes_classes():
         'bicycle'
     ]
 
+def practice_dataset_classes():
+    return [
+        "background", "cat", "dog"
+    ]
+
+def practice_dataset_palette():
+    return [[0, 0, 0], [255, 0, 0], [0, 255, 0]]
 
 def ade_classes():
     """ADE20K class names for external use."""
