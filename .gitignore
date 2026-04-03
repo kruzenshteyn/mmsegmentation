@@ -133,3 +133,4 @@ mmseg/.mim
 /.dev_scripts
 /docker
 /mmseg
+/tests
