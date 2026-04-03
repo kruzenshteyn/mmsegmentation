@@ -129,3 +129,7 @@ mmseg/.mim
 /.github
 /dataset/img
 /dataset/labels
+/.circleci
+/.dev_scripts
+/docker
+/mmseg
