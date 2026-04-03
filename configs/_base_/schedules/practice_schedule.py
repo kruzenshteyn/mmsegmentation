@@ -1,4 +1,4 @@
-epoch_num = 300
+epoch_num = 500
 
 # Подготовим оптимайзер, используем дефолтные параметры 
 optimizer = dict(type='AdamW', lr=0.001, weight_decay=0.1)

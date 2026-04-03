@@ -35,6 +35,8 @@
 
 ### Этап 2. Формирование первичных гипотез
 
+Отправка фйлов pth в ClearML отключена
+
 ### Стартовая гипотеза 1 
 
 **Описание гипотезы**  
@@ -43,22 +45,38 @@
 аугментации стандартные простые.
 Количество эпох до 300
 
+    dict(type='RandomResize', 
+         scale=(512, 512),
+         ratio_range=(0.5, 2.0),
+         keep_ratio=True),
+    dict(type='RandomCrop', crop_size=(256, 256), cat_max_ratio=0.75),
+
+    dict(type='PhotoMetricDistortion'),
+    dict(type='RandomRotFlip', degree=(-45, 45)),
+    dict(type='RandomCutOut', prob=0.4, n_holes=(7, 15), cutout_ratio=(0.1, 0.15)),
+
 **Результаты обучения**  
 
 ссылка на конфиг  
-ссылка на clearml  
+ссылка на clearml  https://app.clear.ml/projects/74a3bbdf2fda4de6b2509a89fa68eebf/experiments/6d786ad8efe7401fb90e7fbc49768081/output/execution
 
-
+Время обучения 1ч20м
+"aAcc": 89.69, "mDice": 50.79, "mAcc": 50.31
 **Анализ качества**  
 
 Анализ качества. Приложите метрики, примеры фейлов, примеры правильных ответов модели.  
 
+Изображения в папке viz_outputs\epoch_300_T1
 
 ### Стартовая гипотеза 2 
 
 Выбираем стандартную модель fcn_unet_s5_d16.
-аугментации из  albumentation.
+аугментации из  albumentation. Без RandomResize и RandomCrop
 Количество эпох до 300
+ aAcc: 89.7100  mDice: 48.9600  mAcc: 48.7700
+
+ссылка на clearml  https://app.clear.ml/projects/74a3bbdf2fda4de6b2509a89fa68eebf/experiments/3196f6c7c5984c179d98eaf66c29577b/output/execution
+
 
 ## Этап 3. Эксперименты по улучшению качества
 
@@ -75,15 +93,34 @@
 dict(type='ElasticTransform', alpha=1.0, sigma=35, p=0.4),
 dict(type="GridDistortion", num_steps=10, p=0.55)
 
+"aAcc": 93.73, "mDice": 71.18, "mAcc": 66.48
+
 **Результаты обучения**
 
 ссылка на конфиг
-ссылка на clearml 
+ссылка на clearml https://app.clear.ml/projects/74a3bbdf2fda4de6b2509a89fa68eebf/experiments/c096a0ae790c4246a2aa212b943852ff/output/execution
+"aAcc": 93.73, "mDice": 71.18, "mAcc": 66.48
 
 **Анализ качества**
 
 Анализ качества. Приложите метрики, примеры фейлов, примеры правильных ответов модели.  
+Изображения в папке viz_outputs\epoch_300_Exp_1 и viz_outputs\epoch_500_Exp_1
+
+наилучшие результаты
 
 ### Эксперимент 2 
 
+Все ранее использованные аугментации
+    dict(type='RandomResize', 
+         scale=(512, 512),
+         ratio_range=(0.5, 2.0),
+         keep_ratio=True),
+    dict(type='RandomCrop', crop_size=(256, 256), cat_max_ratio=0.75),
+    dict(type='ElasticTransform', alpha=1.0, sigma=35, p=0.4),
+  dict(type="GridDistortion", num_steps=10, p=0.55)
+
 Увеличим количество эпох до 500
+Время обучения около 5 часов
+ссылка на clearml https://app.clear.ml/projects/74a3bbdf2fda4de6b2509a89fa68eebf/experiments/2cad656665b2458d999b5c38f808dd59/output/execution
+
+Изображения в папке viz_outputs\epoch_500_Exp_2

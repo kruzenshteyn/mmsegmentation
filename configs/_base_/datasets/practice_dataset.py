@@ -6,12 +6,21 @@ data_root = "D:/WORK/Practicum/_NNCV/VS/Sprint_6/mmsegmentation/data/practice_da
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
+    # dict(type='RandomResize', 
+    #      scale=(512, 512),
+    #      ratio_range=(0.5, 2.0),
+    #      keep_ratio=True),
+    # dict(type='RandomCrop', crop_size=(256, 256), cat_max_ratio=0.75),
+
+    dict(type='PhotoMetricDistortion'),
+    dict(type='RandomRotFlip', degree=(-45, 45)),
+    dict(type='RandomCutOut', prob=0.4, n_holes=(7, 15), cutout_ratio=(0.1, 0.15)),
     # Аугментацции 
     dict(type='PhotoMetricDistortion'),
     dict(type='RandomRotFlip', degree=(-45, 45)),
     dict(type='RandomCutOut', prob=0.4, n_holes=(7, 15), cutout_ratio=(0.1, 0.15)),
-    # dict(type='Albu', transforms=[dict(type='ElasticTransform', alpha=1.0, sigma=35, p=0.4),
-    #                               dict(type="GridDistortion", num_steps=10, p=0.55)]),
+    dict(type='Albu', transforms=[dict(type='ElasticTransform', alpha=1.0, sigma=35, p=0.4),
+                                  dict(type="GridDistortion", num_steps=10, p=0.55)]),
     # ===
     dict(type='PackSegInputs')
 ]
